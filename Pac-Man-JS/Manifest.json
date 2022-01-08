@@ -1,8 +1,8 @@
 {
     "manifest_version" : 2,
-    "name" : "Pac-Man JavaScript",
+    "name" : "Pac-Man JS",
     "version" : "3.36",
-    "description" : "Pac-Man game using javascript.",
+    "description" : "Pac-Man game popup built using javascript.",
     "icons" : {
         "128" : "images/Pac-Man-Icon.png",
         "48" : "images/Pac-Man-Icon.png",
