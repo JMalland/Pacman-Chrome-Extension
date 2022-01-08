@@ -1,6 +1,6 @@
 # Pacman Chrome Extension
  Chrome extension popup to play the retro video game Pacman. Saves your highest score, and level. See how far you can get!
- Note: This has only been tested on windows 10 devices. 
+ Note: This has only been tested on a Windows 10 device. 
 
  # To install the extension on the chrome browser:
 
