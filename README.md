@@ -12,4 +12,4 @@
  # To pin the extension to the extensions bar:
 
   1) Click the little puzzle piece icon in the top right side of the screen, to the right of the search bar.
-  2) Find the Pac-Man Javascript extension icon, then, to the right, click the 'pin' button.
+  2) Find the Pac-Man JS extension icon, then, to the right, click the 'pin' button.
