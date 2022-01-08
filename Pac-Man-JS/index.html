@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="html" id="html">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=168, height=219, initial-scale=1.0" id="dimensions">
+   <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Pac-Man</title>
+  </head>
+  <body class="body" id="body">
+    <canvas id="canvas"></canvas>
+    <div class="mainMenu" id="mainButtons">
+      <button id="play">New Game</button>
+      <button id="achievements">Statistics</button>
+      <button id="settings">Settings</button>
+    </div>
+      <div class="statsMenu" id="statsMenu">
+        <div class="statsText" id="statsText">
+          <header id="type">Lifetime</header>
+          <p id="descOne">Games Played: </p>
+          <p id="descTwo">Dots Eaten: </p>
+          <p id="descThree">Fruit Eaten: </p>
+          <p id="descFour">Ghosts Eaten: </p>
+        </div>
+      </div>
+      
+      <div class="optionsMenu" id="optionsMenu">
+        <div class="changeMode" id="changeMode">
+          <div class="optionsText" id="optionsText">
+            <header id="mode">Default Mode</header>
+            <p id="modeDesc" style="text-align: center;">Simple gameplay where the speed stays constant</p>
+          </div>
+          <div class="switch">
+            <input type="checkbox" id="switch" class="checkbox"/>
+            <label for="switch" class="toggle">    
+              <p>Default &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Classic</p>
+            </label>
+          </div>
+        </div>
+        <div class="scale" id="scale">
+          <div class="scaleText" id="scaleText">
+            <header id="zoom">Scale: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<p id="scalePer">100%</p></header>
+            <p id="scaleDesc">Use the slider to adjust the dimensions.</p>
+          </div>
+          <input type="range" min="75" max="200" value="100" class="slider" id="scaleSlider" step="25">
+        </div>
+      </div>
+      <div class="movementButtons" id="movementButtons">
+        <div class="close" id="close">
+          <button id="closeB">Close</button>
+        </div>
+        <div class="previous">
+          <button id="previousB"><</button>
+        </div>
+        <div class="next">
+          <button id="nextB">></button>
+        </div>
+      </div>
+    </div>
+    <script src="AStar.js"></script>
+    <script src="Item.js"></script>
+    <script src="Map.js"></script>
+    <script src="Page.js"></script>
+    <script src="PowerupClass/Powerup.js"></script>
+    <script src="PowerupClass/Dot.js"></script>
+    <script src="PowerupClass/Fruit.js"></script>
+    <script src="SpriteClass/Sprites.js"></script>
+    <script src="SpriteClass/Pacman.js"></script>
+    <script src="SpriteClass/Ghost.js"></script>
+    <script src="Canvas.js"></script>
+  </body>
+</html>

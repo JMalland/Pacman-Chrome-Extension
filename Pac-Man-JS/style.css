@@ -1,0 +1,246 @@
+@media all and (min-width: 168px)   { body  { font-size:75%; } .slider::-webkit-slider-thumb, .invSlider::-webkit-slider-thumb { width: 5.25vh; height: 5.25vh; } }
+@media all and (min-width: 224px)  { body  { font-size:100%; } .slider::-webkit-slider-thumb, .invSlider::-webkit-slider-thumb { width: 7vh; height: 7vh; } }
+@media all and (min-width: 280px)  { body  { font-size:125%; } .slider::-webkit-slider-thumb, .invSlider::-webkit-slider-thumb { width: 8.75vh; height: 8.75vh; } }
+@media all and (min-width: 336px)  { body  { font-size:150%; } .slider::-webkit-slider-thumb, .invSlider::-webkit-slider-thumb { width: 10.5vh; height: 10.5vh; } }
+@media all and (min-width: 392px)  { body  { font-size:175%; } .slider::-webkit-slider-thumb, .invSlider::-webkit-slider-thumb { width: 12.25vh; height: 12.25vh; } }
+@media all and (min-width: 448px)  { body  { font-size:200%; } .slider::-webkit-slider-thumb, .invSlider::-webkit-slider-thumb { width: 14vh; height: 14vh; } }
+
+html, body
+{
+  box-sizing: grid;
+  min-height: 219px;
+  min-width: 168px;
+  max-height: 584px;
+  max-width: 448px;
+  width: 224px;
+  height: 292px;
+  overflow: hidden;
+  background-color: papayawhip;
+}
+
+html {
+  height: 50%;
+  display: table;
+  margin: auto;
+}
+
+body, #canvas {
+  display: table-cell;
+  vertical-align: middle;
+  background-color: black;
+  transform: translate(0%, 0%); /* Needed for some reason... */
+}
+
+#canvas
+{
+  z-index: -1; /* Make it appear beneath everything */
+}
+
+.mainMenu
+{
+  display: none;
+  width: 30%;
+  height: 50%;
+  position: absolute;
+  top: 22.5%;
+  left: 35.0446429%;
+}
+
+body button
+{
+  border-radius: 2.5vh;
+  border-color: rgb(77, 77, 230);
+  background-color: rgb(210, 210, 75);
+  color: black;
+}
+
+body button:hover
+{
+  background-color: rgb(185, 185, 75);
+}
+
+.mainMenu button
+{
+  width: 100%;
+  height: 27%;
+  border-radius: 15%;
+  border-color: rgb(77, 77, 230);
+  background-color: rgb(210, 210, 75);
+  color: black;
+  display: block;
+  margin-top: 10%;
+  font-size: 60%;
+}
+
+.movementButtons button
+{
+  font-size: 100%;
+  display: none;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  height: 45%;
+  width: 10%;
+}
+
+.previous button
+{
+  top: 25%;
+  left: 5%;
+}
+
+.next button
+{
+  top: 25%;
+  left: 85%;
+}
+
+.close button
+{
+  height: 10%;
+  width: 30%;
+  top: 68.5%;
+  left: 35.0446429%;
+}
+
+.statsMenu, .optionsMenu
+{
+  text-align: center;
+  display: none;
+  position: absolute;
+  width: 75%;
+  height: 100%;
+  top: 27.5%;
+  left: 15%;
+}
+
+.statsText, .optionsText, .scaleText
+{
+  font-size: 80%;
+  width: 105%;
+  height: 37.5%;
+  position: absolute;
+  top: 5%;
+  left: -5%;
+  color: black;
+  background-color: rgb(77, 77, 230, 0.85);
+}
+
+
+.statsText header, .optionsText header, .scaleText header
+{
+  text-align: center;
+  position: relative;
+  height: 20%;
+  top: -20%;
+  font-size: 140%;
+  background-color: rgba(225, 70, 70, 0.85);
+}
+
+.scaleText p#scaleDesc
+{
+  font-size: 100%;
+  position: relative;
+  top: -25%;
+}
+
+.scale p#scalePer
+{
+  width: 19.5%;
+  height: 50%;
+  font-size: 100%;
+  text-align: right;
+  display: block;
+  position: relative;
+  top: -190%;
+  left: 50%;
+}
+
+.statsText p, .optionsText p, .scaleText p
+{
+  width: 87.5%;
+  display: block;
+  position: relative;
+  top: -25%;
+  left: 5%;
+  text-align: center;
+}
+
+.statsText p
+{
+  line-height: 0.875;
+  text-align: justify;
+}
+
+.slider {
+  -webkit-appearance: none;
+  position: absolute;
+  appearance: none;
+  width: 80%;
+  height: 7.5%;
+  border-radius: 15px;
+  background: rgb(255, 128, 64);
+  outline: none;
+  opacity: 0.7;
+  top: 25%;
+  left: 6%;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+/* The draggable circle */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 7vh;
+  height: 7vh;
+  border-radius: 5vh;
+  position: relative;
+  background: rgb(255, 255, 0);
+  cursor: pointer;
+}
+
+.toggle {
+	position: absolute;
+	display : inline-block;
+	width : 60%;
+	height : 7.5%;
+  top: 25%;
+  left: 15%;
+	background-color: rgba(255, 0, 0, 0.7);
+	border-radius: 15px;
+	border: 2px solid rgb(128, 128, 128, 0.7);
+}
+
+.toggle:after {
+	content: '';
+	position: absolute;
+	width: 50%;
+	height: 98%;
+	border-radius: 15px;
+	background-color: rgba(0, 0, 0, 0.7);
+	top: 0%;
+	left: 0px;
+	transition: all 0.5s;
+}
+
+.switch p 
+{
+  position: relative;
+  font-size: 55%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+  top: 75%;
+}
+
+.checkbox:checked + .toggle::after {
+	left: 49%;
+}
+
+.checkbox:checked + .toggle {
+	background-color: rgba(0, 128, 0, 0.7);
+}
+
+.checkbox {
+	display : none;
+}
