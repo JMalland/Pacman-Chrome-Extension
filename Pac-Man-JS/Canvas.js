@@ -28,11 +28,21 @@ function updateSpeed(object)
 {
   var pSpeed = null
   var pDotsSpeed = null
+  var pFrightSpeed = null
   var pFrightDotsSpeed = null
   var gSpeed = null
   var gFrightSpeed = null
-
-  if (Map.level === 1 || Map.gameMode === "Default")
+  
+  if (Map.gameMode === "Default")
+  {
+    pSpeed = (Map.maxSpeed*1.2)
+    pDotsSpeed = (Map.maxSpeed*1.29)
+    pFrightSpeed = (Map.maxSpeed*1.1)
+    pFrightDotsSpeed = (Map.maxSpeed*1.21)
+    gSpeed = (Map.maxSpeed*1.2)
+    gFrightSpeed = (Map.maxSpeed*1.5)
+  }
+  if (Map.level === 1)
   {
     // 80% of Max
     pSpeed = (Map.maxSpeed*1.2)
