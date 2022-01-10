@@ -17,8 +17,9 @@ class TempImage {
 function createImage(src)
 {
   image = new Image()
-  image.onload = () => {
-    Map.loadedImageCount ++
+  image.onload = () => 
+  {
+    Map.loadedImageCount += 1
   }
   image.src = src
   return(image)
@@ -33,16 +34,7 @@ function updateSpeed(object)
   var gSpeed = null
   var gFrightSpeed = null
   
-  if (Map.gameMode === "Default")
-  {
-    pSpeed = (Map.maxSpeed*1.2)
-    pDotsSpeed = (Map.maxSpeed*1.29)
-    pFrightSpeed = (Map.maxSpeed*1.1)
-    pFrightDotsSpeed = (Map.maxSpeed*1.21)
-    gSpeed = (Map.maxSpeed*1.2)
-    gFrightSpeed = (Map.maxSpeed*1.5)
-  }
-  if (Map.level === 1)
+  if (Map.level === 1 || Map.gameMode === "Default")
   {
     // 80% of Max
     pSpeed = (Map.maxSpeed*1.2)
@@ -57,8 +49,7 @@ function updateSpeed(object)
     // 50% of Max
     gFrightSpeed = (Map.maxSpeed*1.5)
     // Set frightened mode conditions
-    //Ghost.setBlueDuration(6)
-    //Ghost.setBlueFlashes(6)
+    Ghost.totalFlashes = 6
   }
   else if (Map.level>1 && Map.level<5)
   { 
@@ -74,12 +65,8 @@ function updateSpeed(object)
     gSpeed = (Map.maxSpeed*1.15)
     // 55% of Max
     gFrightSpeed = (Map.maxSpeed*1.45)
-    /* Set frightened mode conditions
-    if (Map.level === 2) Ghost.setBlueDuration(5)
-    else if (Map.level === 3) Ghost.setBlueDuration(4)
-    else if (Map.level === 4) Ghost.setBlueDuration(3)
-    Ghost.setBlueFlashes(5)
-    */
+    // Set frightened mode conditions
+    Ghost.totalFlashes = 5
   }
   else if (Map.level>=5 && Map.level<21)
   { 
@@ -95,21 +82,20 @@ function updateSpeed(object)
     gSpeed = (Map.maxSpeed*1.05)
     // 60% of Max
     gFrightSpeed = (Map.maxSpeed*1.4)
-    /* Set frightened mode conditions
-    if (Map.level === 6) Ghost.setBlueDuration(5)
-    else if (Map.level === 14) Ghost.setBlueDuration(3)
-    else if (Map.level === 5 || Map.level === 7 || Map.level === 8 || Map.level === 11) Ghost.setBlueDuration(2)
-    else if (Map.level === 9 || Map.level === 12 || Map.level === 13 || Map.level === 15 || Map.level === 16 || Map.level === 18) Ghost.setBlueDuration(1)
-    */
-    //if (Map.level>4 && Map.level<9 || Map.level === 10 || Map.level === 11 || Map.level === 14) //Ghost.setBlueFlashes(5)
-    //else if (Map.level === 9 || Map.level === 12 || Map.level === 13 || Map.level === 15 || Map.level === 16 || Map.level === 18) //Ghost.setBlueFlashes(3)
+    if (Map.level>4 && Map.level<9 || Map.level === 10 || Map.level === 11 || Map.level === 14)
+    {
+      Ghost.totalFlashes = 5
+    }
+    else if (Map.level === 9 || Map.level === 12 || Map.level === 13 || Map.level === 15 || Map.level === 16 || Map.level === 18) 
+    {
+      Ghost.totalFlashes = 3
+    }
     if (Map.level === 17)
     {
       pFrightSpeed = pSpeed
       pFrightDotsSpeed = pDotsSpeed
       gFrightSpeed = gSpeed
-      //Ghost.setBlueDuration(0)
-      //Ghost.setBlueFlashes(0)
+      Ghost.totalFlashes = 0
     }
   }
   else if (Map.level>21)
@@ -126,8 +112,7 @@ function updateSpeed(object)
     // 70% of Max
     gFrightSpeed = gSpeed
     // Set frightened mode conditions
-    //Ghost.setBlueDuration(0)
-    //Ghost.setBlueFlashes(0)
+    Ghost.totalFlashes = 0
   }
 
   if (object instanceof Pacman)
@@ -190,6 +175,10 @@ class Canvas {
     [
     createImage("images/Ghost-Death/Dead-Blue-1.png"), createImage("images/Ghost-Death/Dead-Blue-2.png")
     ]
+  static #warning = 
+    [
+      createImage("images/Ghost-Death/Dead-White-1.png"), createImage("images/Ghost-Death/Dead-White-2.png")
+    ] 
   static #ghostScores = 
     [
     createImage("images/Scores/200.png"), createImage("images/Scores/400.png"),createImage("images/Scores/800.png"), createImage("images/Scores/1600.png")
@@ -383,20 +372,24 @@ class Canvas {
     }
     else if (Map.frightenedMode && object instanceof Ghost) // If mode is scatter mode
     { 
-      if (!object.isEaten && !object.wasEaten) // If ghost is alive 
-      { 
+      if (object.isEaten)
+      {
+        return(Canvas.#eaten[object.direction])
+      }
+      else if (Ghost.flashWarning === true)
+      {
+        return(Canvas.#warning[animate%2])
+      }
+      else //&& !Ghost.flashWarning) // If ghost is alive 
+      {
         return(Canvas.#frightened[animate%2]) 
       }
-      else // If ghost was eaten  
-      { 
-        return(Canvas.#eaten[object.direction]) 
-      } 
     } 
   }
 
   drawObjects()
   {
-    if (Map.loadedImageCount < 93)
+    if (Map.loadedImageCount < 94)
     {
       return
     }
