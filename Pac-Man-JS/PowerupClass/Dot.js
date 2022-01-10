@@ -1,5 +1,7 @@
 class Dot extends Powerup {
   static #timer = null
+  static #warning = null
+  static #interval = null
 
   constructor(name, x, y, value, width, height)
   {
@@ -11,8 +13,11 @@ class Dot extends Powerup {
   static eatEnergizer()
   {
     Dot.#timer = clearTimeout(Dot.#timer)
+    Dot.#warning = clearTimeout(Dot.#warning)
+    Dot.#interval = clearInterval(Dot.#interval)
     Map.frightened()
-    Dot.#timer = setTimeout(Dot.stopEnergizer, 10000)
+    Dot.#warning = setTimeout(() => { Dot.#interval = setInterval(() => { Ghost.flashWarning = !Ghost.flashWarning;}, 2000/(Ghost.totalFlashes*2)) }, 7990)
+    Dot.#timer = setTimeout(() => { Dot.stopEnergizer(); }, 10000)
     return(50)
   }
 
@@ -21,6 +26,9 @@ class Dot extends Powerup {
     Map.normal()
     Ghost.clearGhostsEaten()
     Dot.#timer = clearTimeout(Dot.#timer)
+    Dot.#interval = clearInterval(Dot.#interval)
+    Dot.#warning = clearInterval(Dot.#warning)
+    Ghost.flashWarning = false
   }
 
   static resetDots()
