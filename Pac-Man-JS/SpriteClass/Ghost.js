@@ -9,6 +9,8 @@ class Ghost extends Sprites {
   wasEaten = false
   isInBox = true
   frozen = true
+  static flashWarning = false
+  static totalFlashes = 0
   static #waitedForInky = false
   static #waitedForClyde = false
   static #waitedToExit = false
@@ -784,7 +786,7 @@ class Ghost extends Sprites {
     Ghost.#waitedToExit = true
     Ghost.exitGhosts = Ghost.#ghosts.slice()
     Ghost.timer = clearInterval(Ghost.timer)
-    Ghost.timer = setInterval(Ghost.#exitHome, 35)
+    Ghost.timer = setInterval(Ghost.#exitHome, Ghost.getSpeed()*2)
   }
 
   static areInBox()
@@ -898,18 +900,14 @@ class Ghost extends Sprites {
 
   static getSpeed()
   {
-    if (Map.gameMode === "Classic")
+    if (Map.normalMode || Map.scatterMode)
     {
-      if (Map.normalMode || Map.scatterMode)
-      {
-        return(Ghost.ghosts[0].speed)
-      }
-      else
-      {
-        return(Ghost.ghosts[0].frightSpeed)
-      }
+      return(Ghost.ghosts[0].speed)
     }
-    return(1)
+    else
+    {
+      return(Ghost.ghosts[0].frightSpeed)
+    }
   }
 
   static clearCache()
